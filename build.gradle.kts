@@ -6,6 +6,7 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val kotest_version: String by project
+val jackson_datatype_jsr310_version: String by project
 
 plugins {
     application
@@ -36,6 +37,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_datatype_jsr310_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("io.kotest:kotest-runner-junit5:$kotest_version")
 }
