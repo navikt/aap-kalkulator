@@ -10,5 +10,20 @@ class InntektTest : FunSpec ({
             val grunnlag = inntektsgrunnlag(0.0,0.0,0.0)
             grunnlag shouldBe 222954
         }
+        test("inntektsgrunnlag med en million i inntekt"){
+            val enMill = 1_000_000.0
+            val grunnlag = inntektsgrunnlag(enMill, enMill, enMill)
+            grunnlag shouldBe 668862
+        }
+        test("inntektsgrunnlag med variert lønn"){
+            val grunnlag = inntektsgrunnlag(350000.0, 450000.0, 550000.0)
+            grunnlag shouldBe 450000
+        }
+        test("inntektsgrunnlag med mest lønn siste år"){
+            val grunnlag = inntektsgrunnlag(600000.0, 100000.0, 200000.0)
+            grunnlag shouldBe 600000
+        }
+
+
     }
 })
