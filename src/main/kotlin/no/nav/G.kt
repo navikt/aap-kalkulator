@@ -11,18 +11,18 @@ import java.time.LocalDate
 //{"dato":"2022-05-01","grunnbeloep":111477,"grunnbeloepPerMaaned":9290,"gjennomsnittPerAar":109784,"omregningsfaktor":1.047726,"virkningstidspunktForMinsteinntekt":"2022-05-23"}
 data class Grunnbeløp(
     @JsonProperty("grunnbeloep")
-    val grunnbeløp: Number,
+    val grunnbeløp: Double,
     val dato: LocalDate,
     @JsonProperty("grunnbeloepPerMaaned")
-    val grunnbeløpPerMåned: Number,
+    val grunnbeløpPerMåned: Double,
     @JsonProperty("gjennomsnittPerAar")
-    val gjennomsnittPerÅr: Number,
-    val omregningsfaktor: Number,
+    val gjennomsnittPerÅr: Double,
+    val omregningsfaktor: Double,
     val virkningstidspunktForMinsteinntekt: LocalDate
 
 )
 
-suspend fun getG(): Number {
+suspend fun getG(): Double {
     val client = HttpClient(){
         install(ContentNegotiation){
             jackson(){

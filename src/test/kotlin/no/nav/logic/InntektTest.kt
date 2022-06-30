@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 class InntektTest : FunSpec ({
     context("kalkulere inntektsgrunnlag") {
         test("inntektsgrunnlag med 0 i inntekt") {
-            val grunnlag = inntektsgrunnlag(0,0,0)
+            val grunnlag = inntektsgrunnlag(0.0,0.0,0.0)
             grunnlag shouldBe 222954
         }
     }
