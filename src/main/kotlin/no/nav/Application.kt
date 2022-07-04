@@ -23,7 +23,7 @@ fun main() {
             }
             post("/beregning"){
                 val personInfo = call.receive<PersonInfo>()
-                call.respondText("%s".format(personInfo.beregn()))
+                call.respond(personInfo.beregn())
             }
         }
     }.start(wait = true)

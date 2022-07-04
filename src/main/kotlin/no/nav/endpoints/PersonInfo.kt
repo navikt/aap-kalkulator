@@ -9,8 +9,12 @@ data class PersonInfo (
     val inntekt3: Double,
 )
 
-suspend fun PersonInfo.beregn(): Int {
+data class Respons (
+    val resultat: Int,
+)
+
+suspend fun PersonInfo.beregn(): Respons {
     val grunnlag = inntektsgrunnlag(inntekt1, inntekt2, inntekt3)
-    return ytelse(grunnlag)
+    return Respons(ytelse(grunnlag))
 
 }
