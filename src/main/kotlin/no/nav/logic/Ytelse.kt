@@ -4,10 +4,10 @@ import kotlin.math.ceil
 
 const val ytelsesdager = 260
 
-fun ytelse(grunnlag: Double, antallBarn:Int): Int {
-    val ytelse = ceil(grunnlag * 0.66).toInt()
-    return (barnetillegg(antallBarn) + ytelse).coerceAtMost(ceil(grunnlag * 0.9).toInt())
-    /*val barnetillegg = barnetillegg(antallBarn)
-        .coerceAtLeast((grunnlag*0.9).toInt())*/
+fun ytelse(grunnlag: Double, antallBarn:Int, arbeidsgrad:Double): Int {
+    var ytelse = (grunnlag * 0.66)
+    ytelse = (barnetillegg(antallBarn) + ytelse).coerceAtMost(grunnlag * 0.9)
+    ytelse = ceil(arbeidsgrad(ytelse, arbeidsgrad))
+    return ytelse.toInt()
 
 }
