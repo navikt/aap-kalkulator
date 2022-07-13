@@ -11,3 +11,5 @@ fun ytelse(grunnlag: Double, antallBarn:Int, arbeidsgrad:Double): Int {
     return ytelse.toInt()
 
 }
+
+fun ytelseTilGrunnlag(ytelse: Double): Double = ytelse/66 * 100

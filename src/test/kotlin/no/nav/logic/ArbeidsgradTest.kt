@@ -4,21 +4,29 @@ import io.kotest.assertions.exceptionToMessage
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.runBlocking
+import no.nav.endpoints.PersonInfo
+import no.nav.endpoints.Respons
 import org.junit.jupiter.api.assertThrows
 
 class ArbeidsgradTest : FunSpec({
 
     context("arbeidsgrad") {
         test("arbeidsgrad 40% med 100000 i grunnlag") {
-            val arbeidsytelse = arbeidsgrad(100000.0, 40.0)
-            arbeidsytelse shouldBe 60000.0
+            val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 40.0), mutableListOf())
+            output.arbeidsgrad()
+            output.resultat shouldBe 60000.0
+            output.logs.first() shouldBe "Aap vil være redusert med 40 prosent."
         }
         test("arbeidsgrad 70% med 100000 i grunnlag") {
-            val arbeidsytelse = arbeidsgrad(100000.0, 70.0)
-            arbeidsytelse shouldBe 0.0
+            val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 70.0), mutableListOf())
+            output.arbeidsgrad()
+            output.resultat shouldBe 0.0
+            output.logs.first() shouldBe "Arbeidsgraden din er høyere enn 60% og du kan derfor ikke få aap."
         }
         test("arbeidsgrad er -10%") {
-            val exception = shouldThrow<Exception> { arbeidsgrad(100000.0, -10.0)}
+            val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, -10.0), mutableListOf())
+            val exception = shouldThrow<Exception> {output.arbeidsgrad()}
             exception.message shouldBe("Arbeidsgrad må være større eller lik 0")
         }
     }

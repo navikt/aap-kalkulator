@@ -19,7 +19,5 @@ class BarnTest : FunSpec({
             val barnetillegg = barnetillegg(8)
             barnetillegg shouldBe 56160
         }
-
     }
-
 })

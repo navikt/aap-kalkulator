@@ -1,5 +1,8 @@
 package no.nav.endpoints
 
+import kotlinx.coroutines.runBlocking
+import no.nav.logic.arbeidsgrad
+import no.nav.logic.barnetillegg
 import no.nav.logic.inntektsgrunnlag
 import no.nav.logic.ytelse
 
@@ -12,11 +15,18 @@ data class PersonInfo (
 )
 
 data class Respons (
-    val resultat: Int,
+    var resultat: Double = 0.0,
+    val personInfo: PersonInfo,
+    var logs: MutableList<String> = mutableListOf(),
 )
 
-suspend fun PersonInfo.beregn(): Respons {
-    val grunnlag = inntektsgrunnlag(inntekt1, inntekt2, inntekt3)
-    return Respons(ytelse(grunnlag, antallBarn, arbeidsgrad))
+suspend fun PersonInfo.beregn(): Respons =
+    wrapWithOutput(this).apply {
+        runBlocking { inntektsgrunnlag() }
+        barnetillegg()
+        arbeidsgrad()
+    }
 
+fun wrapWithOutput(personInfo: PersonInfo): Respons {
+    return Respons(personInfo = personInfo)
 }
