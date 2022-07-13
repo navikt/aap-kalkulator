@@ -3,22 +3,25 @@ package no.nav.logic
 import no.nav.endpoints.Respons
 
 fun arbeidsgrad(grunnlag: Double, arbeidsgrad: Double): Double {
-    if (arbeidsgrad < 0) {
+    if (arbeidsgrad < 0.0) {
         throw Exception("Arbeidsgrad må være større eller lik 0")
     }
-    if (arbeidsgrad > 60) {
+    if (arbeidsgrad > 60.0) {
         return 0.0
     }
     return grunnlag * ((100 - arbeidsgrad) / 100)
 }
 
 fun Respons.arbeidsgrad(){
-    if (personInfo.arbeidsgrad < 0) {
+    if (personInfo.arbeidsgrad < 0.0) {
         throw Exception("Arbeidsgrad må være større eller lik 0")
     }
-    if (personInfo.arbeidsgrad > 60) {
+    if (personInfo.arbeidsgrad > 60.0) {
         resultat = 0.0
         logs = mutableListOf("Arbeidsgraden din er høyere enn 60% og du kan derfor ikke få aap.")
+        return
+    }
+    if (personInfo.arbeidsgrad == 0.0) {
         return
     }
     resultat *= ((100 - personInfo.arbeidsgrad) / 100)
