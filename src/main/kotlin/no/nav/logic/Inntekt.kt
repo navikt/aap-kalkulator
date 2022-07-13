@@ -32,7 +32,7 @@ suspend fun Respons.inntektsgrunnlag(){
     }
 
     resultat *= 0.66
-    logs.add("Ytelsen etter utregning av grunnlag er %.2f kr. Ytelsen utgjør 66% av grunnlaget.".format(resultat))
+    logs.add("Ytelsen etter utregning av grunnlag er %.2f kr. Ytelsen utgjør 66 prosent av grunnlaget.".format(resultat))
 }
 
 

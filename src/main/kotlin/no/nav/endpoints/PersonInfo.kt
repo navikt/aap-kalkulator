@@ -4,7 +4,6 @@ import kotlinx.coroutines.runBlocking
 import no.nav.logic.arbeidsgrad
 import no.nav.logic.barnetillegg
 import no.nav.logic.inntektsgrunnlag
-import no.nav.logic.ytelse
 
 data class PersonInfo (
     val inntekt1: Double,
@@ -21,12 +20,12 @@ data class Respons (
 )
 
 suspend fun PersonInfo.beregn(): Respons =
-    wrapWithOutput(this).apply {
+    wrapWithRespons(this).apply {
         runBlocking { inntektsgrunnlag() }
         barnetillegg()
         arbeidsgrad()
     }
 
-fun wrapWithOutput(personInfo: PersonInfo): Respons {
+fun wrapWithRespons(personInfo: PersonInfo): Respons {
     return Respons(personInfo = personInfo)
 }
