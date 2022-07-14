@@ -16,13 +16,13 @@ class ArbeidsgradTest : FunSpec({
             val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 40.0), mutableListOf())
             output.arbeidsgrad()
             output.resultat shouldBe 60000.0
-            output.logs.first() shouldBe "Aap vil være redusert med 40 prosent."
+            output.logs.first() shouldBe "Siden du jobber 40% vil arbeidsavklaringspengene være redusert med 40%."
         }
         test("arbeidsgrad 70% med 100000 i grunnlag") {
             val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 70.0), mutableListOf())
             output.arbeidsgrad()
             output.resultat shouldBe 0.0
-            output.logs.first() shouldBe "Arbeidsgraden din er høyere enn 60% og du kan derfor ikke få aap."
+            output.logs.first() shouldBe "Arbeidsgraden din er høyere enn 60% og du kan derfor ikke få arbeidsavklaringspenger."
         }
         test("arbeidsgrad er -10%") {
             val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, -10.0), mutableListOf())

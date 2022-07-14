@@ -1,6 +1,7 @@
 package no.nav.logic
 
 import no.nav.endpoints.Respons
+import java.text.DecimalFormat
 import kotlin.math.ceil
 
 
@@ -21,9 +22,9 @@ fun Respons.barnetillegg(){
     resultat = muligBarnetillegg.coerceAtMost(maksBarnetillegg)
     when(resultat) {
         muligBarnetillegg -> logs.add("For hvert barn får du %s kr per dag. Siden du har %s barn vil du få %s kr i tillegg.".format(
-            satsPerBarnPerDag, personInfo.antallBarn, faktiskBarnetillegg))
+            satsPerBarnPerDag, personInfo.antallBarn, DecimalFormat("###,###").format(faktiskBarnetillegg).replace(","," ")))
         else -> {logs.add("For hvert barn får du %s kr per dag.".format(
             satsPerBarnPerDag))
-        logs.add("Barnetillegg sammen med ytelsen kan ikke være mer enn 90%% av grunnlaget. Derfor får du %s kr i tillegg.".format(maksBarnetilleggUtenGrunnlag))}
+        logs.add("Barnetillegg sammen med ytelsen kan ikke være mer enn 90%% av grunnlaget. Derfor får du %s kr i tillegg.".format(DecimalFormat("###,###").format(maksBarnetilleggUtenGrunnlag).replace(","," ")))}
     }
 }
