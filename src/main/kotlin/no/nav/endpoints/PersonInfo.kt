@@ -11,6 +11,7 @@ data class PersonInfo (
     val inntekt3: Double,
     val antallBarn: Int = 0,
     val arbeidsgrad: Double,
+    val sykmeldtAar: Int,
 )
 
 data class Respons (
