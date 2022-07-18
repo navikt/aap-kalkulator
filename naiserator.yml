@@ -14,3 +14,4 @@ spec:
         - host: g.nav.no
   ingresses:
     - https://aap-kalkulator.dev.nav.no
+    - https://aap-kalkulator.ekstern.dev.nav.no
