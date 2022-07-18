@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.jetty.*
+import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.serialization.jackson.*
@@ -24,7 +24,7 @@ data class Grunnbeløp(
 )
 
 suspend fun getG(): Double {
-    val client = HttpClient(Jetty){
+    val client = HttpClient(CIO){
         install(ContentNegotiation){
             jackson(){
                 registerModule(JavaTimeModule())
