@@ -8,9 +8,10 @@ import kotlinx.coroutines.runBlocking
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.Respons
 import org.junit.jupiter.api.assertThrows
+import java.util.*
 
 class ArbeidsgradTest : FunSpec({
-
+    Locale.setDefault(Locale("nb"))
     context("arbeidsgrad") {
         test("arbeidsgrad 40% med 100000 i grunnlag") {
             val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 40.0), mutableListOf())

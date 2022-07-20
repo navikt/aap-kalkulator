@@ -4,8 +4,10 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import no.nav.endpoints.Respons
 import no.nav.endpoints.PersonInfo
+import java.util.*
 
 class PersonInfoTest : FunSpec({
+    Locale.setDefault(Locale("nb"))
     context("Ytelse") {
         test("ytelse med grunnbeløp 6g, 0 barn og 0 arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 0, 0.0)

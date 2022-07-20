@@ -5,10 +5,11 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.Respons
+import java.util.*
 import kotlin.math.round
 
 class BarnTest : FunSpec({
-
+    Locale.setDefault(Locale("nb"))
     context("barnetillegg") {
         test("med 0 barn") {
             val barnetillegg = barnetillegg(0)

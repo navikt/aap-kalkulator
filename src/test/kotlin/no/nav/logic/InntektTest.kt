@@ -7,8 +7,10 @@ import io.kotest.matchers.shouldBe
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.Respons
 import java.text.DecimalFormat
+import java.util.*
 
 class InntektTest : FunSpec ({
+    Locale.setDefault(Locale("nb"))
     context("kalkulere inntektsgrunnlag") {
         test("inntektsgrunnlag med 0 i inntekt") {
             val grunnlag = Respons(personInfo = PersonInfo(0.0,0.0,0.0,0,0.0))

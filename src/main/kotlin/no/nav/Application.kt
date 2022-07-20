@@ -13,8 +13,10 @@ import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.beregn
+import java.util.Locale
 
 fun main() {
+    Locale.setDefault(Locale("nb"))
     embeddedServer(Netty, port = 8080) {
         install(ContentNegotiation) {
             jackson()
