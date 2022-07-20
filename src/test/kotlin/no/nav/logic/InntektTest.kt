@@ -15,16 +15,16 @@ class InntektTest : FunSpec ({
             runBlocking { grunnlag.inntektsgrunnlag() }
             grunnlag.resultat shouldBe 147149.64
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Siden lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt %s kr.".format(DecimalFormat("###,###").format(ytelseTilGrunnlag(147149.64)).replace(",", " "))
+            grunnlag.logs.first() shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt %s kr.".format(DecimalFormat("###,###").format(ytelseTilGrunnlag(147149.64)).replace(",", " "))
         }
         test("inntektsgrunnlag med en million i inntekt"){
             val enMill = 1_000_000.0
             val grunnlag = Respons(personInfo = PersonInfo(enMill, enMill, enMill,0,0.0))
             runBlocking { grunnlag.inntektsgrunnlag() }
-            "%.2f".format(grunnlag.resultat) shouldBe "441448.92"
+            "%.2f".format(grunnlag.resultat) shouldBe "441448,92"
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Siden lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt %s kr.".format(
-                DecimalFormat("###,###").format(ytelseTilGrunnlag(441448.92)).replace(",", " ")
+            grunnlag.logs.first() shouldBe "Fordi lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt %s kr.".format(
+                (ytelseTilGrunnlag(441448.92)).toKr()
             )
         }
         test("inntektsgrunnlag med variert lønn"){
@@ -32,15 +32,15 @@ class InntektTest : FunSpec ({
             runBlocking { grunnlag.inntektsgrunnlag() }
             grunnlag.resultat shouldBe 297000.0
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Grunnlaget er basert på dine tre siste inntektsår."
+            grunnlag.logs.first() shouldBe "Grunnlaget er gjennomsnittet av dine tre siste inntektsår: %s kr.".format((450000.0).toKr())
         }
         test("inntektsgrunnlag med mest lønn siste år"){
             val grunnlag = Respons(personInfo = PersonInfo(600000.0, 100000.0, 200000.0,0,0.0))
             runBlocking { grunnlag.inntektsgrunnlag() }
             grunnlag.resultat shouldBe 396000.0
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Grunnlaget er basert på ditt siste inntektsår."
-            grunnlag.logs.last() shouldBe "Ytelsen etter utregning av grunnlag er 396 000 kr. Ytelsen utgjør 66% av grunnlaget."
+            grunnlag.logs.first() shouldBe "Grunnlaget er basert på ditt siste inntektsår: %s kr.".format((600000.0).toKr())
+            grunnlag.logs.last() shouldBe "Ytelsen etter utregning av grunnlag er %s kr. Ytelsen utgjør 66%% av %s kr.".format((396000.0).toKr(), (600000.0).toKr())
         }
 
 

@@ -32,15 +32,15 @@ class BarnTest : FunSpec({
         test("med 1 barn"){
             val respons = Respons(100000.0, PersonInfo(0.0,0.0,0.0,1,0.0))
             respons.barnetillegg()
-            respons.logs.first() shouldBe "For hvert barn får du 27 kr per dag. Siden du har 1 barn vil du få 7 020 kr i tillegg."
+            respons.logs.first() shouldBe "For hvert barn får du 27 kr per dag. Siden du har 1 barn vil du få 7\u00A0020 kr i tillegg."
             respons.resultat shouldBe 107020
         }
         test("8 barn 2g"){
             val respons = Respons(222954.0*0.66, PersonInfo(0.0,0.0,0.0,8,0.0))
             respons.barnetillegg()
             respons.logs.first() shouldBe "For hvert barn får du 27 kr per dag."
-            respons.logs[1] shouldBe "Barnetillegg sammen med ytelsen kan ikke være mer enn 90% av grunnlaget. Derfor får du 53 509 kr i tillegg."
-            "%.2f".format(respons.resultat) shouldBe "200658.60"
+            respons.logs[1] shouldBe "Barnetillegg sammen med ytelsen kan ikke være mer enn 90% av grunnlaget. Derfor får du 53 509 kr i tillegg."
+            "%.2f".format(respons.resultat) shouldBe "200658,60"
         }
     }
 })

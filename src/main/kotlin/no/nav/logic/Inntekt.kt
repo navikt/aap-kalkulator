@@ -27,15 +27,17 @@ suspend fun Respons.inntektsgrunnlag(){
         .coerceAtMost(6 * g)
 
     when(resultat) {
-        2*g -> logs.add("Siden lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt %s kr.".format(DecimalFormat("###,###").format(g*2).replace(',', ' ')))
-        6*g -> logs.add("Siden lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt %s kr.".format(DecimalFormat("###,###").format(g*6).replace(',', ' ')))
-        gjennomsnittsInntekt -> logs.add("Grunnlaget er basert på dine tre siste inntektsår.")
-        else -> logs.add("Grunnlaget er basert på ditt siste inntektsår.")
+        2*g -> logs.add("Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt %s kr.".format(ceil(resultat).toKr()))
+        6*g -> logs.add("Fordi lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt %s kr.".format(ceil(resultat).toKr()))
+        gjennomsnittsInntekt -> logs.add("Grunnlaget er gjennomsnittet av dine tre siste inntektsår: %s kr.".format(ceil(resultat).toKr()))
+        else -> logs.add("Grunnlaget er basert på ditt siste inntektsår: %s kr.".format(ceil(resultat).toKr()))
     }
 
     resultat *= 0.66
-    logs.add("Ytelsen etter utregning av grunnlag er %s kr. Ytelsen utgjør 66%% av grunnlaget.".format(DecimalFormat("###,###").format(
-        ceil(resultat)).replace(',', ' ')))
+    logs.add("Ytelsen etter utregning av grunnlag er %s kr. Ytelsen utgjør 66%% av %s kr.".format(ceil(resultat).toKr(),
+        ytelseTilGrunnlag((resultat)).toKr()
+    ))
 }
 
+fun Double.toKr() = DecimalFormat("###,###").format(this).replace(',', ' ')
 
