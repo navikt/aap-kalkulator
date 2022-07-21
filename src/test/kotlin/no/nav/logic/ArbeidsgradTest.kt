@@ -1,13 +1,10 @@
 package no.nav.logic
 
-import io.kotest.assertions.exceptionToMessage
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.runBlocking
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.Respons
-import org.junit.jupiter.api.assertThrows
 import java.util.*
 
 class ArbeidsgradTest : FunSpec({

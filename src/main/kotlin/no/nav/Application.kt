@@ -12,7 +12,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import no.nav.endpoints.PersonInfo
-import no.nav.endpoints.beregn
+import no.nav.endpoints.calculate
 import java.util.Locale
 
 fun main() {
@@ -36,7 +36,7 @@ fun main() {
             }
             post("/beregning"){
                 val personInfo = call.receive<PersonInfo>()
-                call.respond(personInfo.beregn())
+                call.respond(personInfo.calculate())
             }
         }
     }.start(wait = true)

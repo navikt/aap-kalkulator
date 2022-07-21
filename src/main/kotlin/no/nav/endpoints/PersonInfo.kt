@@ -20,7 +20,7 @@ data class Respons (
     var logs: MutableList<String> = mutableListOf(),
 )
 
-suspend fun PersonInfo.beregn(): Respons =
+suspend fun PersonInfo.calculate(): Respons =
     wrapWithRespons(this).apply {
         runBlocking { inntektsgrunnlag() }
         barnetillegg()

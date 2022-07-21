@@ -2,7 +2,6 @@ package no.nav.logic
 
 import io.kotest.common.runBlocking
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.Respons
@@ -26,7 +25,7 @@ class InntektTest : FunSpec ({
             "%.2f".format(grunnlag.resultat) shouldBe "441448,92"
             grunnlag.logs.size shouldBe 2
             grunnlag.logs.first() shouldBe "Fordi lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt %s kr.".format(
-                (ytelseTilGrunnlag(441448.92)).toKr()
+                (ytelseTilGrunnlag(441448.92)).tilKr()
             )
         }
         test("inntektsgrunnlag med variert lønn"){
@@ -34,15 +33,15 @@ class InntektTest : FunSpec ({
             runBlocking { grunnlag.inntektsgrunnlag() }
             grunnlag.resultat shouldBe 297000.0
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Grunnlaget er gjennomsnittet av dine tre siste inntektsår: %s kr.".format((450000.0).toKr())
+            grunnlag.logs.first() shouldBe "Grunnlaget er gjennomsnittet av dine tre siste inntektsår: %s kr.".format((450000.0).tilKr())
         }
         test("inntektsgrunnlag med mest lønn siste år"){
             val grunnlag = Respons(personInfo = PersonInfo(600000.0, 100000.0, 200000.0,0,0.0))
             runBlocking { grunnlag.inntektsgrunnlag() }
             grunnlag.resultat shouldBe 396000.0
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Grunnlaget er basert på ditt siste inntektsår: %s kr.".format((600000.0).toKr())
-            grunnlag.logs.last() shouldBe "Ytelsen etter utregning av grunnlag er %s kr. Ytelsen utgjør 66%% av %s kr.".format((396000.0).toKr(), (600000.0).toKr())
+            grunnlag.logs.first() shouldBe "Grunnlaget er basert på ditt siste inntektsår: %s kr.".format((600000.0).tilKr())
+            grunnlag.logs.last() shouldBe "Ytelsen etter utregning av grunnlag er %s kr. Ytelsen utgjør 66%% av %s kr.".format((396000.0).tilKr(), (600000.0).tilKr())
         }
 
 

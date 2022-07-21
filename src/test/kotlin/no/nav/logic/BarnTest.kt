@@ -1,12 +1,10 @@
 package no.nav.logic
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.Respons
 import java.util.*
-import kotlin.math.round
 
 class BarnTest : FunSpec({
     Locale.setDefault(Locale("nb"))

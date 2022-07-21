@@ -8,7 +8,7 @@ class GTest: FunSpec ({
     Locale.setDefault(Locale("nb"))
     context("Hente grunnbeløp"){
         test("Grunnbeløp er 111477"){
-            val G = getG()
+            val G = hentG()
             G shouldBe 111477
         }
     }

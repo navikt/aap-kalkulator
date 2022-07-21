@@ -2,8 +2,6 @@ package no.nav.endpoints
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import no.nav.endpoints.Respons
-import no.nav.endpoints.PersonInfo
 import java.util.*
 
 class PersonInfoTest : FunSpec({
@@ -11,13 +9,13 @@ class PersonInfoTest : FunSpec({
     context("Ytelse") {
         test("ytelse med grunnbeløp 6g, 0 barn og 0 arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 0, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "441448,92"
             respons.logs.size shouldBe 2
         }
         test("ytelse med grunnbeløp 2g, 7 barn og 0 arbeidsgrad") {
             val info = PersonInfo(0.0, 0.0, 0.0, 7, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             respons.resultat shouldBe 196289.64
             respons.logs.size shouldBe 3
             respons.logs[0] shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 222\u00A0954 kr."
@@ -26,43 +24,43 @@ class PersonInfoTest : FunSpec({
         }
         test("ytelse med grunnbeløp 2g, 8 barn og 0 arbeidsgrad") {
             val info = PersonInfo(0.0, 0.0, 0.0, 8, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "200658,60"
             respons.logs.size shouldBe 4
         }
         test("ytelse med grunnbeløp 2g, 9 barn og 0 arbeidsgrad") {
             val info = PersonInfo(0.0, 0.0, 0.0, 9, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "200658,60"
             respons.logs.size shouldBe 4
         }
         test("ytelse med grunnbeløp 6g, 22 barn og 0 arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 22, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "595888,92"
             respons.logs.size shouldBe 3
         }
         test("ytelse med grunnbeløp 6g, 23 barn og 0 arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 23, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "601975,80"
             respons.logs.size shouldBe 4
         }
         test("ytelse med grunnbeløp 6g, 24 barn og 0 arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 24, 0.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "601975,80"
             respons.logs.size shouldBe 4
         }
         test("ytelse med grunnbeløp 2g, 0 barn og 40% arbeidsgrad") {
             val info = PersonInfo(0.0, 0.0, 0.0, 0, 40.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "88289,78"
             respons.logs.size shouldBe 3
         }
         test("ytelse med grunnbeløp 2g, 8 barn og 50% arbeidsgrad") {
             val info = PersonInfo(0.0, 0.0, 0.0, 8, 50.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "100329,30"
             respons.logs.size shouldBe 5
             respons.logs[0] shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 222 954 kr."
@@ -73,13 +71,13 @@ class PersonInfoTest : FunSpec({
         }
         test("ytelse med grunnbeløp 6g, 0 barn og 20% arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 0, 20.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             "%.2f".format(respons.resultat) shouldBe "353159,14"
             respons.logs.size shouldBe 3
         }
         test("ytelse med grunnbeløp 2g, 5 barn og 61% arbeidsgrad") {
             val info = PersonInfo(0.0, 0.0, 0.0, 5, 61.0)
-            val respons = info.beregn()
+            val respons = info.calculate()
             respons.resultat shouldBe 0.0
             respons.logs.size shouldBe 1
         }
