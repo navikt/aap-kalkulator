@@ -1,6 +1,7 @@
 package no.nav.endpoints
 
 import kotlinx.coroutines.runBlocking
+import no.nav.G
 import no.nav.logic.arbeidsgrad
 import no.nav.logic.barnetillegg
 import no.nav.logic.inntektsgrunnlag
@@ -20,9 +21,9 @@ data class Respons (
     var logs: MutableList<String> = mutableListOf(),
 )
 
-suspend fun PersonInfo.calculate(): Respons =
+fun PersonInfo.calculate(g: G): Respons =
     wrapWithRespons(this).apply {
-        runBlocking { inntektsgrunnlag() }
+        inntektsgrunnlag(g.gData.grunnbeloep)
         barnetillegg()
         arbeidsgrad()
     }

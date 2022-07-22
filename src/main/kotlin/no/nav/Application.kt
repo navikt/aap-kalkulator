@@ -11,12 +11,19 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import no.nav.endpoints.PersonInfo
 import no.nav.endpoints.calculate
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.util.Locale
 
+val log: Logger = LoggerFactory.getLogger("nav.aap.kalkulator")
+@OptIn(DelicateCoroutinesApi::class)
 fun main() {
     Locale.setDefault(Locale("nb"))
+    val g = G()
+    FornyGService(g).startFornying()
     embeddedServer(Netty, port = 8080) {
         install(ContentNegotiation) {
             jackson()
@@ -36,7 +43,7 @@ fun main() {
             }
             post("/beregning"){
                 val personInfo = call.receive<PersonInfo>()
-                call.respond(personInfo.calculate())
+                call.respond(personInfo.calculate(g))
             }
         }
     }.start(wait = true)

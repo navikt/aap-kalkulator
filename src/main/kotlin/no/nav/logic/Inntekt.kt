@@ -1,12 +1,14 @@
 package no.nav.logic
 
+import no.nav.G
+import no.nav.Grunnbeloep
 import no.nav.endpoints.Respons
 import no.nav.hentG
 import java.text.DecimalFormat
 import kotlin.math.ceil
 
-suspend fun Respons.inntektsgrunnlag(){
-    val g = hentG()
+fun Respons.inntektsgrunnlag(g: Double){
+
     val gjennomsnittsInntekt = (personInfo.inntekt1 + personInfo.inntekt2 + personInfo.inntekt3)/3
 
     resultat = personInfo.inntekt1

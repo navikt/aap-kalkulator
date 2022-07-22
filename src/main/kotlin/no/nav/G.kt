@@ -8,8 +8,12 @@ import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.serialization.jackson.*
+import kotlinx.coroutines.delay
 import java.time.LocalDate
-//{"dato":"2022-05-01","grunnbeloep":111477,"grunnbeloepPerMaaned":9290,"gjennomsnittPerAar":109784,"omregningsfaktor":1.047726,"virkningstidspunktForMinsteinntekt":"2022-05-23"}
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
+import kotlin.time.ExperimentalTime
+
 data class Grunnbeloep(
     @JsonProperty("grunnbeloep")
     val grunnbeloep: Double,
@@ -21,6 +25,9 @@ data class Grunnbeloep(
     val omregningsfaktor: Double,
     val virkningstidspunktForMinsteinntekt: LocalDate
 
+)
+data class Gdata(
+    var grunnbeloep: Double
 )
 
 suspend fun hentG(): Double {
@@ -34,4 +41,19 @@ suspend fun hentG(): Double {
     val response: Grunnbeloep = client.get("https://g.nav.no/api/v1/grunnbeloep").body()
 
     return response.grunnbeloep
+}
+
+class G {
+    var gData = Gdata(0.0)
+    suspend fun hentGoppgave() {
+
+        while (true) {
+            log.info("henter G")
+            gData.apply {
+                grunnbeloep = hentG()
+
+            }
+            delay(1.days)
+        }
+    }
 }
