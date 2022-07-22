@@ -21,9 +21,9 @@ data class Respons (
     var logs: MutableList<String> = mutableListOf(),
 )
 
-fun PersonInfo.calculate(g: G): Respons =
+fun PersonInfo.calculate(g: Double): Respons =
     wrapWithRespons(this).apply {
-        inntektsgrunnlag(g.gData.grunnbeloep)
+        inntektsgrunnlag(g)
         barnetillegg()
         arbeidsgrad()
     }
