@@ -12,6 +12,7 @@ data class PersonInfo(
     val arbeidsgrad: Double,
     val sykmeldtAar: Int = 0,
     val under25: Boolean,
+    val arbeidstimer: String,
 )
 
 data class Respons(

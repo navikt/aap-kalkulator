@@ -52,6 +52,9 @@ class InntektTest : FunSpec({
             val grunnlag = Respons(personInfo = PersonInfo(0.0, 0.0, 0.0, 0, 0.0, aar, true))
             runBlocking { grunnlag.inntektsgrunnlag(g) }
             grunnlag.resultat shouldBe 147149.64
+            grunnlag.logs.size shouldBe 2
+            grunnlag.logs.first() shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling for de under 25 blir grunnlaget ditt 222 954 kr."
         }
+
     }
 })

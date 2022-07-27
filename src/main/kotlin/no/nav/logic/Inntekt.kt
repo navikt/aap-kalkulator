@@ -29,9 +29,8 @@ fun Respons.inntektsgrunnlag(g: Double) {
 
     val resultatEtterFradrag = resultat * 0.66
     logs.add(
-        "Ytelsen etter utregning av grunnlag er %s kr. Ytelsen utgjør 66%% av %s kr.".format(
-            ceil(resultatEtterFradrag).tilKr(),
-            ceil(resultat).tilKr()
+        "Ytelsen utgjør 66%% av grunnlaget, og blir derfor %s kr.".format(
+            ceil(resultatEtterFradrag).tilKr()
         )
     )
 

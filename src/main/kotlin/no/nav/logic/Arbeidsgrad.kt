@@ -3,6 +3,7 @@ package no.nav.logic
 import no.nav.endpoints.Respons
 
 fun Respons.arbeidsgrad() {
+    val gammeltResultat = resultat
     if (personInfo.arbeidsgrad < 0.0) {
         throw Exception("Arbeidsgrad må være større eller lik 0")
     }
@@ -15,5 +16,6 @@ fun Respons.arbeidsgrad() {
         return
     }
     resultat *= ((100 - personInfo.arbeidsgrad) / 100)
-    logs.add("Siden du jobber %.0f%% vil arbeidsavklaringspengene være redusert med %.0f%%.".format(personInfo.arbeidsgrad, personInfo.arbeidsgrad))
+    logs.add("En vanlig arbeidsuke er 37,5 timer. Siden du jobber %s timer i uken blir ytelsen redusert med %.0f%%, fra %s kr til %s kr. "
+        .format(personInfo.arbeidstimer, personInfo.arbeidsgrad, gammeltResultat.tilKr(), resultat.tilKr()))
 }

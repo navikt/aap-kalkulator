@@ -37,7 +37,10 @@ fun main() {
     FornyGService(g).startFornying()
     embeddedServer(Netty, port = 8080) {
         install(ContentNegotiation) {
-            jackson()
+            jackson(){
+                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                registerModule(JavaTimeModule())
+            }
         }
         install(CORS) {
             allowCredentials = true
