@@ -8,8 +8,7 @@ import java.util.*
 
 class PersonInfoTest : FunSpec({
     Locale.setDefault(Locale("nb"))
-    val g = runBlocking {
-        hentG()}
+    val g = runBlocking { hentG() }.grunnbeloep
     context("Ytelse") {
         test("ytelse med grunnbeløp 6g, 0 barn og 0 arbeidsgrad") {
             val info = PersonInfo(1_000_000.0, 1_000_000.0, 1_000_000.0, 0, 0.0)

@@ -1,6 +1,10 @@
 package no.nav
 
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -18,6 +22,14 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.Locale
 
+val client = HttpClient(CIO){
+    install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation){
+        jackson(){
+            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false)
+            registerModule(JavaTimeModule())
+        }
+    }
+}
 val log: Logger = LoggerFactory.getLogger("nav.aap.kalkulator")
 @OptIn(DelicateCoroutinesApi::class)
 fun main() {
@@ -43,7 +55,7 @@ fun main() {
             }
             post("/beregning"){
                 val personInfo = call.receive<PersonInfo>()
-                call.respond(personInfo.calculate(g.gData.grunnbeloep))
+                call.respond(personInfo.calculate(g.data.grunnbeloep))
             }
         }
     }.start(wait = true)

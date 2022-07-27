@@ -13,7 +13,7 @@ class InntektTest : FunSpec ({
     Locale.setDefault(Locale("nb"))
     val g = runBlocking {
         hentG()
-    }
+    }.grunnbeloep
     context("kalkulere inntektsgrunnlag") {
         test("inntektsgrunnlag med 0 i inntekt") {
             val grunnlag = Respons(personInfo = PersonInfo(0.0,0.0,0.0,0,0.0))
