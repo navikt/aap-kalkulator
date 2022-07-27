@@ -18,9 +18,9 @@ class InntektTest : FunSpec ({
         test("inntektsgrunnlag med 0 i inntekt") {
             val grunnlag = Respons(personInfo = PersonInfo(0.0,0.0,0.0,0,0.0))
             runBlocking { grunnlag.inntektsgrunnlag(g) }
-            grunnlag.resultat shouldBe 147149.64
+            grunnlag.resultat shouldBe 222954.0
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt %s kr.".format(DecimalFormat("###,###").format(ytelseTilGrunnlag(147149.64)).replace(",", " "))
+            grunnlag.logs.first() shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337 810 kr."
         }
         test("inntektsgrunnlag med en million i inntekt"){
             val enMill = 1_000_000.0
