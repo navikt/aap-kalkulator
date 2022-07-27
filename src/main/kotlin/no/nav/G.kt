@@ -41,4 +41,4 @@ class G {
     }
 }
 
-fun List<GrunnbeloepHistorikk>.forAar(aar: LocalDate) = this.find { it.dato.year == aar.year }
+public fun List<GrunnbeloepHistorikk>.forAar(aar: Int) = this.find { it.dato.year == aar }

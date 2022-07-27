@@ -3,6 +3,7 @@ package no.nav.endpoints
 import no.nav.logic.arbeidsgrad
 import no.nav.logic.barnetillegg
 import no.nav.logic.inntektsgrunnlag
+import no.nav.GrunnbeloepHistorikk
 
 data class PersonInfo(
     val inntekt1: Double,
@@ -12,7 +13,7 @@ data class PersonInfo(
     val arbeidsgrad: Double,
     val sykmeldtAar: Int = 0,
     val under25: Boolean,
-    val arbeidstimer: String,
+    val arbeidstimer: String = "0",
 )
 
 data class Respons(
@@ -21,9 +22,9 @@ data class Respons(
     var logs: MutableList<String> = mutableListOf(),
 )
 
-fun PersonInfo.calculate(g: Double): Respons =
+fun PersonInfo.calculate(g: Double, historikk: List<GrunnbeloepHistorikk>): Respons =
     wrapWithRespons(this).apply {
-        inntektsgrunnlag(g)
+        inntektsgrunnlag(g, historikk)
         barnetillegg()
         arbeidsgrad()
     }

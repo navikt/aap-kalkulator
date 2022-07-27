@@ -56,7 +56,7 @@ fun main() {
             }
             post("/beregning") {
                 val personInfo = call.receive<PersonInfo>()
-                call.respond(personInfo.calculate(g.data.grunnbeloep))
+                call.respond(personInfo.calculate(g.data.grunnbeloep, g.historikk))
             }
         }
     }.start(wait = true)
