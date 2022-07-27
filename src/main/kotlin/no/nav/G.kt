@@ -24,7 +24,7 @@ suspend fun hentG(): Grunnbeloep {
     return client.get("https://g.nav.no/api/v1/grunnbeloep").body()
 }
 
-suspend fun hentGHistorikk():List<GrunnbeloepHistorikk>{
+suspend fun hentGHistorikk(): List<GrunnbeloepHistorikk> {
     return client.get("https://g.nav.no/api/v1/historikk").body()
 }
 

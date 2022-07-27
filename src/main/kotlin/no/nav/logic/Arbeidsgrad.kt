@@ -2,7 +2,7 @@ package no.nav.logic
 
 import no.nav.endpoints.Respons
 
-fun Respons.arbeidsgrad(){
+fun Respons.arbeidsgrad() {
     if (personInfo.arbeidsgrad < 0.0) {
         throw Exception("Arbeidsgrad må være større eller lik 0")
     }

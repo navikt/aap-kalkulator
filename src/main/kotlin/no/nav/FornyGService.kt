@@ -6,7 +6,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import no.nav.util.Unbounded
 
-
 @DelicateCoroutinesApi
 class FornyGService(private val g: G) {
     fun startFornying() {
