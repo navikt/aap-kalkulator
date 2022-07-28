@@ -27,7 +27,7 @@ class InntektTest : FunSpec({
             runBlocking { grunnlag.inntektsgrunnlag(g, historikk) }
             grunnlag.resultat shouldBe 222954.0
             grunnlag.logs.size shouldBe 2
-            grunnlag.logs.first() shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337 810 kr."
+            grunnlag.logs.first() shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337 809 kr."
         }
         test("inntektsgrunnlag med en million i inntekt") {
             val enMill = 1_000_000.0
@@ -69,9 +69,5 @@ class InntektTest : FunSpec({
             grunnlag.logs.size shouldBe 2
         }
 
-        test("400,000 kr inntekt i 2018, søknadsår 2021") {
-            val inntekt = (400_000.0).inntektsjustering(g, historikk, 2021, 2018)
-            inntekt shouldBe 400_000.0
-        }
     }
 })

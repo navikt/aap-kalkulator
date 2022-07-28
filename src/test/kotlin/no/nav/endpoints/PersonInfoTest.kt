@@ -29,7 +29,7 @@ class PersonInfoTest : FunSpec({
             val respons = info.calculate(g, historikk)
             respons.resultat shouldBe 272094.0
             respons.logs.size shouldBe 3
-            respons.logs[0] shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337\u00A0810 kr."
+            respons.logs[0] shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337\u00A0809 kr."
             respons.logs[1] shouldBe "Ytelsen utgjør 66% av grunnlaget, og blir derfor 222 954 kr."
             respons.logs[2] shouldBe "For hvert barn får du 7 020 kr per år. Siden du har 7 barn vil du få 49 140 kr i tillegg."
         }
@@ -76,7 +76,7 @@ class PersonInfoTest : FunSpec({
             "%.2f".format(respons.resultat) shouldBe "152014,09"
             print(respons.resultat)
             respons.logs.size shouldBe 4
-            respons.logs[0] shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337 810 kr."
+            respons.logs[0] shouldBe "Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt 337 809 kr."
             respons.logs[1] shouldBe "Ytelsen utgjør 66% av grunnlaget, og blir derfor 222 954 kr."
             respons.logs[2] shouldBe "For hvert barn får du 7 020 kr per år. Barnetillegg sammen med ytelsen kan ikke være mer enn 90% av grunnlaget. Derfor får du 81 075 kr i tillegg."
             respons.logs[3] shouldBe "En vanlig arbeidsuke er 37,5 timer. Siden du jobber 18.75 timer i uken blir ytelsen redusert med 50%, fra 304 028 kr til 152 014 kr. "
