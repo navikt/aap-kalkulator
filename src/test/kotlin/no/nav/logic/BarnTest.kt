@@ -39,8 +39,8 @@ class BarnTest : FunSpec({
         test("8 barn 2g") {
             val respons = Respons(222954.0 * 0.66, PersonInfo(0.0, 0.0, 0.0, 8, 0.0, aar, false, "0"))
             respons.barnetillegg()
-            respons.logs.first() shouldBe "For hvert barn får du 7 020 kr per år. Barnetillegg sammen med ytelsen kan ikke være mer enn 90% av grunnlaget. Derfor får du 53 509 kr i tillegg."
-            "%.2f".format(respons.resultat) shouldBe "200658,60"
+            respons.logs.first() shouldBe "For hvert barn får du 7 020 kr per år. Barnetillegg sammen med ytelsen kan ikke være mer enn 90% av grunnlaget. Derfor får du 51 503 kr i tillegg."
+            respons.resultat.tilKr() shouldBe "198 652"
         }
     }
 })

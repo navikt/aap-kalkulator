@@ -60,7 +60,7 @@ fun Respons.inntektsgrunnlag(g: Double, historikk: List<GrunnbeloepHistorikk>) {
         else -> logs.add("Grunnlaget er basert på ditt siste inntektsår: %s kr.".format(round(resultat).tilKr()))
     }
 
-    val resultatEtterFradrag = resultat * 2/3
+    val resultatEtterFradrag = resultat * 2.0/3.0
     logs.add(
         "Ytelsen utgjør 66%% av grunnlaget, og blir derfor %s kr.".format(
             round(resultatEtterFradrag).tilKr()
