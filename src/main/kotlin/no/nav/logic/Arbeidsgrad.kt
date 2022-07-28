@@ -16,6 +16,6 @@ fun Respons.arbeidsgrad() {
         return
     }
     resultat *= ((100 - personInfo.arbeidsgrad) / 100)
-    logs.add("En vanlig arbeidsuke er 37,5 timer. Siden du jobber %s timer i uken blir ytelsen redusert med %.0f%%, fra %s kr til %s kr. "
+    logs.add("En vanlig arbeidsuke er 37,5 timer. Siden du jobber %s timer i uken blir ytelsen redusert med %.0f%%, fra %s kr til <strong>%s kr</strong>. "
         .format(personInfo.arbeidstimer, personInfo.arbeidsgrad, gammeltResultat.tilKr(), resultat.tilKr()))
 }

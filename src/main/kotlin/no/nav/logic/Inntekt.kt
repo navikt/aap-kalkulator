@@ -53,16 +53,16 @@ fun Respons.inntektsgrunnlag(g: Double, historikk: List<GrunnbeloepHistorikk>) {
         .coerceAtMost(6 * g)
 
     when (resultat) {
-        minsteGrunnlag -> logs.add("Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt %s kr.".format(round(resultat).tilKr()))
-        6 * g -> logs.add("Fordi lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt %s kr.".format(round(resultat).tilKr()))
-        gjennomsnittsInntekt -> logs.add("Grunnlaget er gjennomsnittet av dine tre siste inntektsår: %s kr.".format(round(resultat).tilKr()))
-        minsteGrunnlagUnder25 -> logs.add("Fordi lønnen din er lavere enn grensen for minste utbetaling for de under 25 blir grunnlaget ditt %s kr.".format(round(resultat).tilKr()))
-        else -> logs.add("Grunnlaget er basert på ditt siste inntektsår: %s kr.".format(round(resultat).tilKr()))
+        minsteGrunnlag -> logs.add("Fordi lønnen din er lavere enn grensen for minste utbetaling blir grunnlaget ditt <strong>%s kr</strong>.".format(round(resultat).tilKr()))
+        6 * g -> logs.add("Fordi lønnen din er høyere enn grensen for største utbetaling blir grunnlaget ditt <strong>%s kr</strong>.".format(round(resultat).tilKr()))
+        gjennomsnittsInntekt -> logs.add("Grunnlaget er gjennomsnittet av dine tre siste inntektsår: <strong>%s kr</strong>.".format(round(resultat).tilKr()))
+        minsteGrunnlagUnder25 -> logs.add("Fordi lønnen din er lavere enn grensen for minste utbetaling for de under 25 blir grunnlaget ditt <strong>%s kr</strong>.".format(round(resultat).tilKr()))
+        else -> logs.add("Grunnlaget er basert på ditt siste inntektsår: <strong>%s kr</strong>.".format(round(resultat).tilKr()))
     }
 
     val resultatEtterFradrag = resultat * 2.0/3.0
     logs.add(
-        "Ytelsen utgjør 66%% av grunnlaget, og blir derfor %s kr.".format(
+        "Ytelsen utgjør 66%% av grunnlaget, og blir derfor <strong>%s kr</strong>.".format(
             round(resultatEtterFradrag).tilKr()
         )
     )

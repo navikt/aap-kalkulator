@@ -22,14 +22,14 @@ fun Respons.barnetillegg() {
 
     when (resultat) {
         muligBarnetillegg -> logs.add(
-           "For hvert barn får du %s kr per år. Siden du har %s barn vil du få %s kr i tillegg.".format(
-                barnetillegg(1).tilKr(), personInfo.antallBarn, faktiskBarnetillegg.tilKr()
+           "For hvert barn får du %s kr per år. Siden du har %s barn vil du få %s kr i tillegg. Dette blir til sammen <strong>%s kr</strong>.".format(
+                barnetillegg(1).tilKr(), personInfo.antallBarn, faktiskBarnetillegg.tilKr(), resultat.tilKr()
             )
         )
         else -> {
 
-            logs.add("For hvert barn får du %s kr per år. Barnetillegg sammen med ytelsen kan ikke være mer enn 90%% av grunnlaget. Derfor får du %s kr i tillegg."
-                .format(barnetillegg(1).tilKr(), maksBarnetilleggUtenGrunnlag.tilKr()))
+            logs.add("For hvert barn får du %s kr per år. Barnetillegg sammen med ytelsen kan ikke være mer enn 90%% av grunnlaget. Derfor får du %s kr i tillegg. Dette blir til sammen <strong>%s kr</strong>."
+                .format(barnetillegg(1).tilKr(), maksBarnetilleggUtenGrunnlag.tilKr(), resultat.tilKr()))
         }
     }
 }
