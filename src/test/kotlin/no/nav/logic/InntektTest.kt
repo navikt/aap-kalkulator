@@ -23,7 +23,7 @@ class InntektTest : FunSpec({
 
     context("kalkulere inntektsgrunnlag") {
         test("inntektsgrunnlag med 0 i inntekt") {
-            val grunnlag = Respons(personInfo = PersonInfo(0.0, 0.0, 0.0, 0, 0.0, aar, false, "0"))
+            val grunnlag = Respons(personInfo = PersonInfo(0.0, 0.0, 0.0, 0, 0.0, aar, true, "0"))
             runBlocking { grunnlag.inntektsgrunnlag(g, historikk) }
             grunnlag.resultat shouldBe 222954.0
             grunnlag.logs.size shouldBe 2
@@ -31,7 +31,7 @@ class InntektTest : FunSpec({
         }
         test("inntektsgrunnlag med en million i inntekt") {
             val enMill = 1_000_000.0
-            val grunnlag = Respons(personInfo = PersonInfo(enMill, enMill, enMill, 0, 0.0, aar, false, "0"))
+            val grunnlag = Respons(personInfo = PersonInfo(enMill, enMill, enMill, 0, 0.0, aar, true, "0"))
             runBlocking { grunnlag.inntektsgrunnlag(g, historikk) }
             "%.2f".format(grunnlag.resultat) shouldBe "441448,92"
             grunnlag.logs.size shouldBe 2
@@ -40,14 +40,14 @@ class InntektTest : FunSpec({
             )
         }
         test("inntektsgrunnlag med variert lønn") {
-            val grunnlag = Respons(personInfo = PersonInfo(350000.0, 450000.0, 550000.0, 0, 0.0, aar, false, "0"))
+            val grunnlag = Respons(personInfo = PersonInfo(350000.0, 450000.0, 550000.0, 0, 0.0, aar, true, "0"))
             runBlocking { grunnlag.inntektsgrunnlag(g, historikk) }
             grunnlag.resultat shouldBe 297000.0
             grunnlag.logs.size shouldBe 2
             grunnlag.logs.first() shouldBe "Grunnlaget er gjennomsnittet av dine tre siste inntektsår: %s kr.".format((450000.0).tilKr())
         }
         test("inntektsgrunnlag med mest lønn siste år") {
-            val grunnlag = Respons(personInfo = PersonInfo(600000.0, 100000.0, 200000.0, 0, 0.0, aar, false, "0"))
+            val grunnlag = Respons(personInfo = PersonInfo(600000.0, 100000.0, 200000.0, 0, 0.0, aar, true, "0"))
             runBlocking { grunnlag.inntektsgrunnlag(g, historikk) }
             grunnlag.resultat shouldBe 396000.0
             grunnlag.logs.size shouldBe 2
@@ -55,7 +55,7 @@ class InntektTest : FunSpec({
             grunnlag.logs.last() shouldBe "Ytelsen utgjør 66% av grunnlaget, og blir derfor 396 000 kr."
         }
         test("Inntektsgrunn med minstelønn og under 25år") {
-            val grunnlag = Respons(personInfo = PersonInfo(0.0, 0.0, 0.0, 0, 0.0, aar, true, "0"))
+            val grunnlag = Respons(personInfo = PersonInfo(0.0, 0.0, 0.0, 0, 0.0, aar, false, "0"))
             runBlocking { grunnlag.inntektsgrunnlag(g, historikk) }
             grunnlag.resultat shouldBe 147149.64
             grunnlag.logs.size shouldBe 2

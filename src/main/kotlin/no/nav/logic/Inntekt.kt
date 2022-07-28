@@ -45,7 +45,7 @@ fun Respons.inntektsgrunnlag(g: Double, historikk: List<GrunnbeloepHistorikk>) {
     */
     val gjennomsnittsInntekt = (inntekt1 + inntekt2 + inntekt3) / 3
 
-    resultat = if (personInfo.under25) {
+    resultat = if (!personInfo.over25) {
         inntekt1.coerceAtLeast(minsteGrunnlagUnder25)
     } else {
         inntekt1.coerceAtLeast(minsteGrunnlag)

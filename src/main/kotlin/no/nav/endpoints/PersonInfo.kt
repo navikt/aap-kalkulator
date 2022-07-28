@@ -12,7 +12,7 @@ data class PersonInfo(
     val antallBarn: Int = 0,
     val arbeidsgrad: Double,
     val sykmeldtAar: Int = 0,
-    val under25: Boolean,
+    val over25: Boolean,
     val arbeidstimer: String = "0",
 )
 
