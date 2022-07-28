@@ -16,7 +16,7 @@ class ArbeidsgradTest : FunSpec({
             val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 40.0, aar, false, "15"), mutableListOf())
             output.arbeidsgrad()
             output.resultat shouldBe 60000.0
-            output.logs.first() shouldBe "En vanlig arbeidsuke er 37,5 timer. Siden du jobber 15 timer i uken blir ytelsen redusert med 40%, fra 100 000 kr til 60 000 kr. "
+            output.logs.first() shouldBe "En vanlig arbeidsuke er 37,5 timer. Siden du jobber 15 timer i uken blir ytelsen redusert med 40%, fra 100 000 kr til <strong>60 000 kr</strong>. "
         }
         test("arbeidsgrad 70% med 100000 i grunnlag") {
             val output = Respons(100000.0, PersonInfo(0.0, 0.0, 0.0, 0, 70.0, aar, false, "26.25"), mutableListOf())
